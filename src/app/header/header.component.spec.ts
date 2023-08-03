@@ -5,15 +5,18 @@ import { UserService } from '../user.service';
 import { mockReguarUser } from '../mocks';
 import { By } from '@angular/platform-browser';
 
+
+
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
+  const userServiceStub = { currentUser: mockReguarUser };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ HeaderComponent ],
       providers:[
-        { provide: UserService, useValue: { currentUser: mockReguarUser}}
+        { provide: UserService, useValue: userServiceStub }
       ]
     })
     .compileComponents();
@@ -22,11 +25,6 @@ describe('HeaderComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
-
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 
   it('should render user name ', () => {
@@ -42,7 +40,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should render Backoffice link for admins users ', () => {
-    mockReguarUser.isAdmin = true;
+    userServiceStub.currentUser.isAdmin = true;
     fixture.detectChanges();
     const link = fixture.debugElement.query(By.css('.backoffice-link'));
     expect(link).toBeTruthy();
