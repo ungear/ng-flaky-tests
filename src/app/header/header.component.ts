@@ -12,7 +12,6 @@ export class HeaderComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    debugger
     this.user = this.userService.currentUser;
   }
 
