@@ -4,8 +4,14 @@ import { User } from '../user.interface';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  template: `
+  <div *ngIf="user">
+    <div class="name">
+      {{ user.name }}
+    </div>
+    <a class="backoffice-link" *ngIf="user.isAdmin" href="/backoffice"></a>
+  </div>
+`,
 })
 export class HeaderComponent implements OnInit {
   user: User;
