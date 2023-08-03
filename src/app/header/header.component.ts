@@ -20,5 +20,4 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.userService.currentUser;
   }
-
 }
